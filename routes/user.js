@@ -6,9 +6,9 @@ import jwt from "jsonwebtoken";
 const router = express.Router();
 
 router.post('/register', async(req,res)=>{
-    const {name,email,password}= req.body;
+    const {username,email,password}= req.body;
     const oldEmailUser = await User.findOne({ email : email });
-    const oldNamelUser = await User.findOne({ name : name });
+    const oldNamelUser = await User.findOne({ name : username });
 
     if(oldNamelUser){
         return res.send({data:"Nama sudah digunakan"});
@@ -20,7 +20,7 @@ router.post('/register', async(req,res)=>{
 
     try{
         await User.create({
-            name: name,
+            name: username,
             email:email,
             password: encryptedPassword,
         });
@@ -76,8 +76,8 @@ router.patch('/update/:userId', async (req, res) => {
         if (req.body.email) {
             user.email = req.body.email;
         }
-        if (req.body.name) {
-            user.name = req.body.name;
+        if (req.body.username) {
+            user.username = req.body.username;
         }
 
         await user.save();
