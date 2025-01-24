@@ -2,10 +2,11 @@ import mongoose from 'mongoose';
 
 const userDetailSchema = new mongoose.Schema(
     {
-        name: { type: String, unique: true },
+        username: { type: String, unique: true },
         email: { type: String, unique: true },
-        password: String,
-        resetToken: String,
+        password:{ String, required: true },
+        createdAt: { type: Date, default: Date.now },
+        updateAt : { type: Date, default: Date.now },
     },
     {
         collection: "UserInfo"
