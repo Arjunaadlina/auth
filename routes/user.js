@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/register', async(req,res)=>{
     const {username,email,password}= req.body;
     const oldEmailUser = await User.findOne({ email : email });
-    const oldNamelUser = await User.findOne({ name : username });
+    const oldNamelUser = await User.findOne({ username : username });
 
     if(oldNamelUser){
         return res.send({data:"Nama sudah digunakan"});
@@ -20,7 +20,7 @@ router.post('/register', async(req,res)=>{
 
     try{
         await User.create({
-            name: username,
+            username: username,
             email:email,
             password: encryptedPassword,
         });
